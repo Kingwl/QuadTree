@@ -1,16 +1,35 @@
-// ConsoleApplication9.cpp : 定义控制台应用程序的入口点。
-//
-
 #include "stdafx.h"
 #include "QuadTree.h"
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int i = 42;
-	QuadTree<int>tree(2,Rect(0,0,400,400));
-	tree.insertChild(Rect(10, 10, 101, 101), &i);
-	tree.print();
+	Object *i = new Object(Rect(10, 10, 101, 101));
+	QuadTree<Object>tree(2,Rect(0,0,400,400));
+	tree.insertChild(i);
+	//tree.print();
+	auto a = tree.findChild(i);
+	if (a)
+	{
+		std::cout << "ok" << std::endl;
+	}
+	else
+	{
+		std::cout << "no" << std::endl;
+
+	}
+	tree.deleteChild(i);
+	a = tree.findChild(i);
+	if (a)
+	{
+		std::cout << "ok" << std::endl;
+	}
+	else
+	{
+		std::cout << "no" << std::endl;
+
+	}
+	delete i;
 	system("pause");
 	return 0;
 }
